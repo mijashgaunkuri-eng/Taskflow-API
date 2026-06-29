@@ -9,4 +9,4 @@ app.include_router(example.router)
 
 @app.get('/')
 def read_root() -> dict:
-    return {"database_url": settings.database_url}
+    return {"database_url": settings.DATABASE_URL, "message": "Welcome to taskflow!"}
