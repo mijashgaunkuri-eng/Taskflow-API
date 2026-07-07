@@ -1,12 +1,11 @@
 from fastapi import FastAPI
-from app.routers import example
-from app.core.config import settings
+from app.routers import auth
 
 app = FastAPI(title='taskflow')
 
-app.include_router(example.router)
+app.include_router(auth.router)
 
 
 @app.get('/')
 def read_root() -> dict:
-    return {"database_url": settings.DATABASE_URL, "message": "Welcome to taskflow!"}
+    return { "message": "Welcome to taskflow!"}
