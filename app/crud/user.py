@@ -3,7 +3,7 @@ from fastapi import HTTPException, status
 from sqlalchemy import select
 
 from app.models.user import User
-from app.schemas.user import UserCreate,LoginRequest
+from app.schemas.user import UserCreate,LoginRequest, UpdateUser
 from app.core.security import get_password_hash, verify_password
 
 #register a new user in the database
@@ -49,4 +49,15 @@ async def authenticate_user(db: AsyncSession, login_request: LoginRequest) -> Us
         return None
     if not verify_password(login_request.password, user.hashed_password):
         return None
+    return user
+
+async def update_user(db: AsyncSession, user: User, update_data: UpdateUser) -> User:
+    update_dict = update_data.model_dump(exclude_unset=True)
+
+    for key, value in update_dict.items():
+        if value is not None:
+            setattr(user, key, value)
+    db.add(user)
+    await db.commit()
+    await db.refresh(user)
     return user

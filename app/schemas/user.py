@@ -23,3 +23,9 @@ class LoginRequest(BaseModel):
 class TokenResponse(BaseModel):
     access_token: str
     token_type: str = "bearer"        
+
+class UpdateUser(BaseModel):
+    username: str | None = None
+    email: EmailStr | None = None
+    full_name: str | None = None
+    password: str | None = None    
