@@ -7,3 +7,6 @@ sqlalchemy==2.0.51
 alembic==1.18.5
 asyncpg==0.31.0
 pwdlib[argon2]==0.2.1
+python-jose[cryptography]==3.4.0
+python-multipart==0.0.9
+email-validator==2.2.0
